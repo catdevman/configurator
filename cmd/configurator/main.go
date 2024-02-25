@@ -10,13 +10,15 @@ import (
 func main(){
     opts, err := configurator.GetOptions()
     if err != nil {
-        panic("this is bad")
+        fmt.Println("this is bad")
+        os.Exit(1)
     }
 
 
     conf, err := configurator.NewConfiguratorConfig(opts)
     if err != nil {
-        panic("more bad")
+        fmt.Println("more bad")
+        os.Exit(1)
     }
     urator := configurator.NewConfigurator(conf)
     switch conf.Operation {
@@ -47,6 +49,7 @@ func main(){
             panic("this is a problem")
         }
         urator.RemoveValue(conf.Arguments[0])
+        urator.Save()
         os.Exit(0)
     default:
         fmt.Println("I am not suppose to be here")
